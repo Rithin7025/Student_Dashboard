@@ -1,14 +1,26 @@
 import React from "react";
 import { Sidebar } from "flowbite-react";
-import {
-  HiArrowSmRight,
-  HiChartPie,
-  HiInbox,
-  HiShoppingBag,
-  HiUser,
-} from "react-icons/hi";
+
+import { MdLogout } from "react-icons/md";
+
+import { MdOutlinePeopleAlt } from "react-icons/md";
+import { RiDashboardHorizontalFill } from "react-icons/ri";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { IoStatsChartSharp } from "react-icons/io5";
+import { LiaRupeeSignSolid } from "react-icons/lia";
+import { IoSettingsOutline } from "react-icons/io5";
+
+
+
 import AvatarComponent from "./Avatar";
 
+/* 
+ *  Sidebar Component
+
+ * This component serves sidebar for  the home page,
+
+ * contains Dashboard,All classes , Assignments, perfomance , fee details, settings
+**/
 function SideBarComponent() {
   return (
     <div className="bg-white flex flex-col justify-center">
@@ -30,36 +42,57 @@ function SideBarComponent() {
       >
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            <Sidebar.Item href="#" icon={HiChartPie} className="py-1 text-sm">
-              Dashboard
+            {/* Dashboard  */}
+          <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <RiDashboardHorizontalFill className="text-sm" />
+                <span className="ml-2">Dashboard</span>
+              </span>
             </Sidebar.Item>
-            <Sidebar.Item href="#" icon={HiChartPie} className="py-1 text-sm">
-              All classes
+            {/* All classes */}
+            <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <MdOutlinePeopleAlt className="text-sm" />
+                <span className="ml-2">All classes</span>
+              </span>
+            </Sidebar.Item>
+            {/* Assignment */}
+            <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <IoDocumentTextOutline className="text-sm" />
+                <span className="ml-2">Assignment</span>
+              </span>
+
+            </Sidebar.Item>
+            {/* Perfomance */}
+            <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <IoStatsChartSharp className="text-sm" />
+                <span className="ml-2">Performance</span>
+              </span>
+            </Sidebar.Item>
+            {/* Fee details */}
+            <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <LiaRupeeSignSolid className="text-sm" />
+                <span className="ml-2">Fee Details</span>
+              </span>
             </Sidebar.Item>
 
-            <Sidebar.Item href="#" icon={HiInbox} className="py-1 text-sm">
-              Assignment
-            </Sidebar.Item>
-            <Sidebar.Item href="#" icon={HiUser} className="py-1 text-sm">
-              Perfomance
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="#"
-              icon={HiShoppingBag}
-              className="py-1 text-sm"
-            >
-              Fee Details
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="#"
-              icon={HiArrowSmRight}
-              className="py-1 text-sm"
-            >
-              Settings
+            {/* settings */}
+            <Sidebar.Item href="#" className="py-2 text-sm">
+              <span className="flex items-center">
+                <IoSettingsOutline className="text-sm" />
+                <span className="ml-2">Settings</span>
+              </span>
             </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
+     <button className="mt-20 text-sm text-slate-500 flex items-center p-2 pl-6 font-semibold gap-2 hidden sm:flex">< MdLogout />Log out</button>
       </Sidebar>
+
+
+   {/* Log out button  */}
     </div>
   );
 }

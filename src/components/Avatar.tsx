@@ -3,7 +3,7 @@ import { Avatar } from "flowbite-react";
 
 function AvatarComponent() {
   return (
-    <div className='h-36 w-full flex flex-col items-start justify-start mt-4   pl-7 pb-1 hidden sm:flex'>
+    <div className='h-36 w-full flex flex-col items-start justify-start mt-6 mb-4  pl-7 pb-1 hidden sm:hidden md:flex '>
         
         <img 
         src="/images/newAvatar.jpg" 
