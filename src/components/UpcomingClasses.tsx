@@ -16,8 +16,9 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
   const [isMobile, setIsMobile] = useState(false); //state to store the mobile view or desktop view
   const [showBookedOnly, setShowBookedOnly] = useState(false);
   const [showModal, setShowModal] = useState(false) // state to keep track of modal opening and close
+  const [classToBook, setClassBook] = useState<ClassData | null>(null)  //state to keep track which class is booked
 
-
+  const [classData, setClassData] = useState<ClassData[]>(data);
   // useEffect hook to add and clean up the resize event listener
   useEffect(() => {
     //function to handle window resize
@@ -118,20 +119,22 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
     }else {
 
       //show book now button for mobile and desktop
-      
+
+
       // mobile
       if(isMobile){
 
         return (
   
-          
-          <button onClick={()=> setShowModal(true)} className="w-[340px] ml-2 h-10 bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center  hover:cursor-pointer hover:text-white hover:bg-slate-500">
+          //on Book now click update the state of classToBook and state of showModal--------------------------------------->
+
+          <button onClick={()=> { setClassBook(data) ; setShowModal(true)}} className="w-[340px] ml-2 h-10 bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center  hover:cursor-pointer hover:text-white hover:bg-slate-500">
           Book Now
         </button>
         )
       }else {
         return (
-          <button onClick={()=> setShowModal(true)} className="p-2 w-full bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:text-white hover:bg-slate-500">
+          <button onClick={()=> { setClassBook(data); setShowModal(true)}} className="p-2 w-full bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:text-white hover:bg-slate-500">
           Book Now
         </button>
         )
@@ -143,9 +146,9 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
   /*
   //filtering data based on checkbox
   **/
- const filteredData = showBookedOnly ? data.filter(item => item.isBooked) : data
+ const filteredData = showBookedOnly ? classData.filter(item => item.isBooked) : classData
 
- 
+
   return (
     <div className=" h-screen lg:h-[425px] w-full lg:w-[560px] mt-3 ml-3  flex flex-col p-2 bg-white rounded-lg">
       {/* heading upcoming class and Booked only check box */}
@@ -279,7 +282,17 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
         
         </Modal.Body>
         <Modal.Footer>
-          <Button color='blue' onClick={() => setShowModal(false)}>I accept</Button>
+          <Button color='blue' onClick={() => {
+            if(classToBook){
+              //update the data to booked 
+              const updatedData = classData.map((item) => item.id  === classToBook.id ? {...item, isBooked : true} : item) ;
+              
+              //setting the modal to false
+              setShowModal(false)
+              //force a re-render for the timer to appear
+              setClassData(updatedData);
+            }
+          }}>I accept</Button>
           <Button color="gray" onClick={() => setShowModal(false)}>
             Decline
           </Button>

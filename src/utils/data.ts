@@ -12,7 +12,7 @@ export const classesData : ClassData[] = [
       {
         id: 2,
         className: "React Development",
-        timeRequired: "2024-07-16T14:00:00Z",
+        timeRequired: "2024-07-17T19:11:45.733Z",
         instructor: "Sita",
         instructorPhoto: "/images/instructor2.jpg",
         isBooked: true,
@@ -28,7 +28,7 @@ export const classesData : ClassData[] = [
       {
         id: 4,
         className: "Basics of Frontend",
-        timeRequired: "2024-07-16T14:00:00Z",
+        timeRequired: "2024-07-11T11:00:00Z",
         instructor: "Akshay saini",
         instructorPhoto: "/images/instructor2.jpg",
         isBooked: false,
@@ -36,7 +36,7 @@ export const classesData : ClassData[] = [
       {
         id: 5,
         className: "Javascript Mastery",
-        timeRequired: "2024-07-16T14:00:00Z",
+        timeRequired: "2024-07-18T10:00:00Z",
         instructor: "Coding buddy",
         instructorPhoto: "/images/instructor2.jpg",
         isBooked: false,
@@ -44,7 +44,7 @@ export const classesData : ClassData[] = [
       {
         id: 6,
         className: "Nextjs Tutorial",
-        timeRequired: "2024-07-16T14:00:00Z",
+        timeRequired: "2024-07-20T04:00:00Z",
         instructor: "Vishwas",
         instructorPhoto: "/images/instructor2.jpg",
         isBooked: false,

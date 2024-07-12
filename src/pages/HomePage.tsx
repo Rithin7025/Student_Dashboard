@@ -4,7 +4,7 @@ import UpcomingClasses from "../components/UpcomingClasses";
 import Assignments from "../components/Assignments";
 import BottomNavBar from "../components/BottomNavBar";
 import { Pagination } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //sample data
 import { classesData } from "../utils/data";
@@ -21,13 +21,19 @@ import { classesData } from "../utils/data";
 function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4
-  const onPageChange = (page: number) => setCurrentPage(page);
-
+  const [filteredData, setFilteredData] = useState(classesData); // Initial data state
+  
+  //calculating index
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = classesData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  
+  //function to handle page change  
+  const onPageChange = (page: number) => setCurrentPage(page);
 
-
+   useEffect(()=>{
+    //re render if change in filterd Data or currentPage
+   },[currentPage, filteredData])
   return (
     // Container div for the entire screen
     <div className="h-screen w-screen flex  ">
@@ -47,7 +53,7 @@ function HomePage() {
         <div className="flex flex-col lg:flex-row w-full">
           {/* upcoming classes component goes here */}
         <div className="lg:w-1/2 h-full flex-grow overflow-y-hidden">
-          <UpcomingClasses data={currentData}/>
+          <UpcomingClasses data={currentData}  />
         </div>
         <div className="hidden lg:block lg:w-1/2 h-full flex-grow overflow-y-hidden">
           <Assignments />
