@@ -69,9 +69,35 @@ function UpcomingClasses() {
       instructor: "Mukesh",
       action: "join link",
     },
+    {
+      id: 1,
+      className: "UI/Ux desinging",
+      instructor: "Mukesh",
+      action: "join link",
+    },
+    {
+      id: 1,
+      className: "UI/Ux desinging",
+      instructor: "Mukesh",
+      action: "join link",
+    },
+    {
+      id: 1,
+      className: "UI/Ux desinging",
+      instructor: "Mukesh",
+      action: "join link",
+    },
+    {
+      id: 1,
+      className: "UI/Ux desinging",
+      instructor: "Mukesh",
+      action: "join link",
+    },
   ];
+
+ 
   return (
-    <div className=" h-screen lg:h-[425px] w-full lg:w-[560px] mt-3 ml-3  flex flex-col p-2 bg-white">
+    <div className=" h-screen lg:h-[425px] w-full lg:w-[560px] mt-3 ml-3  flex flex-col p-2 bg-white rounded-lg">
       {/* heading upcoming class and Booked only check box */}
       <div className="h-14  p-2  bg-white flex justify-between">
         {/* right side headging */}
@@ -107,11 +133,24 @@ function UpcomingClasses() {
                   key={item.id}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <Table.Cell>{item.id}</Table.Cell>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  <Table.Cell>
+                    {item.id}
+                    
+                    </Table.Cell>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white flex flex-col">
                     {item.className}
+                    <p className="text-xs font-thin text-slate-400">today at 6 pm</p>
                   </Table.Cell>
-                  <Table.Cell>{item.instructor}</Table.Cell>
+
+                  <Table.Cell className="">
+                  <img 
+        src="/images/newAvatar.jpg" 
+        alt="avatar" 
+        className="rounded-full" 
+        style={{ width: '30px', height: '30px' }}
+      />
+                    <p className="text-xs">{item.instructor}</p>
+                    </Table.Cell>
                   <Table.Cell>{item.action}</Table.Cell>
                 </Table.Row>
               ))}
