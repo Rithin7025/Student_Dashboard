@@ -1,10 +1,19 @@
 import { Table } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { BiLinkExternal } from "react-icons/bi";
+import moment from 'moment';
 
+import { ClassData } from '../utils/types';
 
-function UpcomingClasses() {
+//interface 
+interface UpcomingClassesProps {
+  data: ClassData[];
+}
+
+function UpcomingClasses({data } : UpcomingClassesProps) {
   const [isMobile, setIsMobile] = useState(false); //state to store the mobile view or desktop view
+  const [showBookedOnly, setShowBookedOnly] = useState(false);
+
 
   // useEffect hook to add and clean up the resize event listener
   useEffect(() => {
@@ -19,82 +28,86 @@ function UpcomingClasses() {
     return () => window.removeEventListener("resize", handleResize); //clean up function to remove even listner when component unmounts
   }, []);
 
-  //sample data
-  const data = [
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-    {
-      id: 1,
-      className: "UI/Ux desinging",
-      instructor: "Mukesh",
-      action: "join link",
-    },
-  ];
+  
+  //function to format time
+  const formatLocalTime  = (utcTimeString : string)  => {
+    
+    const date = new Date(utcTimeString)  
+   // Format the date and time
+   return date.toLocaleString("en-US");
 
+  } 
+/*
+//function to determine which button to show 
+
+**/
+
+  const renderActionButton  = (data : any) => {
+
+    //finding the current time
+    const currentTime : any  = new Date();
+    //finding the time of class
+    const classTime : any= new Date(data.timeRequired)
+
+    //time difference 
+    const timeDifference = classTime - currentTime ; //time difference in milliseconds
+
+/*
+
+
+
+  <-- checks the conditions to find the appropriate button !-->
+
+
+**/
+    if(data.isBooked){ 
+      if(timeDifference > 0){
+        //class time is future
+        const hoursRemaining = Math.floor(timeDifference / (1000 * 60 * 60));
+      const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      
+       //show timer button if booked
+       return ( 
+        <button disabled className="p-2 w-full font-semibold text-blue-700 text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-200">
+         {hoursRemaining} hrs {minutesRemaining} mins 
+        </button>
+      );
+      }else if (timeDifference == 0){             //timer gets refreshes when page loads or reload
+        // Class time is present
+      return (
+        <button className="p-2 w-full bg-blue-700 text-white text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-500">
+          Join Now
+        </button>
+      );
+      }else {
+         // Class time is in the past
+      return (
+        <button disabled className="p-2 w-full bg-gray-500 text-white text-sm rounded-lg flex items-center justify-center gap-1">
+          Class Ended
+        </button>
+      );
+      }
+      
+     
+    }else {
+
+      //show book now button 
+
+      return (
+        <button className="p-2 w-full bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:text-white hover:bg-slate-500">
+        Book Now
+      </button>
+      )
+    }
+  }
+
+  /*
+ 
+  //filtering data based on checkbox
+
+  **/
+
+  const filteredData = showBookedOnly ? data.filter(item => item.isBooked) : data
  
   return (
     <div className=" h-screen lg:h-[425px] w-full lg:w-[560px] mt-3 ml-3  flex flex-col p-2 bg-white rounded-lg">
@@ -107,7 +120,11 @@ function UpcomingClasses() {
         </div>
 
         {/* left side check box */}
-        <div>check</div>
+        <div className="flex items-center mb-4 gap-2">
+    <label htmlFor="Booked only" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booked only</label>
+    {/* here the checked is set to true of false according to the checks and changing the setShowbookedonly */}
+    <input id="Booked only" checked={showBookedOnly} onChange={(e)=> setShowBookedOnly(e.target.checked)} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+</div>
       </div>
 
       {/* table goes here */}
@@ -128,7 +145,7 @@ function UpcomingClasses() {
               <Table.HeadCell>Actions</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              {data.map((item) => (
+              {filteredData.map((item) => (
                 <Table.Row
                   key={item.id}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -139,7 +156,7 @@ function UpcomingClasses() {
                     </Table.Cell>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white flex flex-col">
                     {item.className}
-                    <p className="text-xs font-thin text-slate-400">today at 6 pm</p>
+                    <p className="text-xs font-thin text-slate-400">{moment().format((formatLocalTime(item.timeRequired)))}</p>
                   </Table.Cell>
 
                   <Table.Cell className="">
@@ -149,9 +166,13 @@ function UpcomingClasses() {
         className="rounded-full" 
         style={{ width: '30px', height: '30px' }}
       />
-                    <p className="text-xs">{item.instructor}</p>
+                    <p className="text-xs mt-1">{item.instructor}</p>
                     </Table.Cell>
-                  <Table.Cell>{item.action}</Table.Cell>
+                  <Table.Cell>
+
+                   {renderActionButton(item)}
+                   
+                    </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
@@ -167,11 +188,11 @@ function UpcomingClasses() {
         {isMobile && (
 
 
-           <div className="space-y-4"> 
+           <div className=" h-[500px] overflow-y-auto space-y-4"> 
             {
-              data.map((item)=> (
+              filteredData.map((item)=> (
         
-            <div className="h-36 w-full  rounded-lg border border-gray-300 mt-3 flex flex-col">
+            <div key={item.id} className="h-36 w-full   rounded-lg border border-gray-300 mt-3 flex flex-col">
              {/* 
 
              heading and time

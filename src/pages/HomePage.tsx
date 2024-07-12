@@ -1,9 +1,14 @@
-import React from "react";
 import SideBarComponent from "../components/SideBarComponent";
 import Header from "../components/Header";
 import UpcomingClasses from "../components/UpcomingClasses";
 import Assignments from "../components/Assignments";
 import BottomNavBar from "../components/BottomNavBar";
+import { Pagination } from "flowbite-react";
+import { useState } from "react";
+
+//sample data
+import { classesData } from "../utils/data";
+
 
 /* 
  *  Homepage Component
@@ -14,6 +19,15 @@ import BottomNavBar from "../components/BottomNavBar";
 **/
 
 function HomePage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4
+  const onPageChange = (page: number) => setCurrentPage(page);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = classesData.slice(indexOfFirstItem, indexOfLastItem);
+
+
   return (
     // Container div for the entire screen
     <div className="h-screen w-screen flex  ">
@@ -33,13 +47,17 @@ function HomePage() {
         <div className="flex flex-col lg:flex-row w-full">
           {/* upcoming classes component goes here */}
         <div className="lg:w-1/2 h-full flex-grow overflow-y-hidden">
-          <UpcomingClasses />
+          <UpcomingClasses data={currentData}/>
         </div>
         <div className="hidden lg:block lg:w-1/2 h-full flex-grow overflow-y-hidden">
           <Assignments />
         </div>
           
         </div>
+        
+        <div className="flex overflow-x-auto sm:justify-center md:flex hidden">
+      <Pagination currentPage={currentPage} totalPages={10} onPageChange={onPageChange} />
+    </div>
 
         {/* Bottom nav bar */}
         <BottomNavBar />

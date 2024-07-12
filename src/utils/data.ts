@@ -1,0 +1,60 @@
+import { ClassData } from "./types"
+
+export const classesData : ClassData[] = [
+    {
+        id: 1,
+        className: "UI/UX Designing",
+        timeRequired: "2024-07-15T18:00:00Z",
+        instructor: "Mukesh",
+        instructorPhoto: "/images/instructor1.jpg",
+        isBooked: false,
+      },
+      {
+        id: 2,
+        className: "React Development",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "Sita",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: true,
+      },
+      {
+        id: 3,
+        className: "Graphic Designing",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "James",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: false,
+      },
+      {
+        id: 4,
+        className: "Basics of Frontend",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "Akshay saini",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: false,
+      },
+      {
+        id: 5,
+        className: "Javascript Mastery",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "Coding buddy",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: false,
+      },
+      {
+        id: 6,
+        className: "Nextjs Tutorial",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "Vishwas",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: false,
+      },
+      {
+        id: 7,
+        className: "MongoDb Tutorial",
+        timeRequired: "2024-07-16T14:00:00Z",
+        instructor: "Hitesh choudary",
+        instructorPhoto: "/images/instructor2.jpg",
+        isBooked: true,
+      },
+]
