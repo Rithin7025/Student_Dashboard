@@ -4,6 +4,8 @@ import { BiLinkExternal } from "react-icons/bi";
 import moment from 'moment';
 
 import { ClassData } from '../utils/types';
+import { Modal,Button } from "flowbite-react";
+
 
 //interface 
 interface UpcomingClassesProps {
@@ -13,6 +15,7 @@ interface UpcomingClassesProps {
 function UpcomingClasses({data } : UpcomingClassesProps) {
   const [isMobile, setIsMobile] = useState(false); //state to store the mobile view or desktop view
   const [showBookedOnly, setShowBookedOnly] = useState(false);
+  const [showModal, setShowModal] = useState(false) // state to keep track of modal opening and close
 
 
   // useEffect hook to add and clean up the resize event listener
@@ -38,7 +41,7 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
 
   } 
 /*
-//function to determine which button to show 
+//function to determine which button to show ------------------------------------------->
 
 **/
 
@@ -53,32 +56,55 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
     const timeDifference = classTime - currentTime ; //time difference in milliseconds
 
 /*
-
-
-
-  <-- checks the conditions to find the appropriate button !-->
-
-
+  <-- checks the conditions to find the appropriate button !-------------------------------------------------->
 **/
     if(data.isBooked){ 
       if(timeDifference > 0){
         //class time is future
         const hoursRemaining = Math.floor(timeDifference / (1000 * 60 * 60));
       const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      
-       //show timer button if booked
-       return ( 
-        <button disabled className="p-2 w-full font-semibold text-blue-700 text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-200">
-         {hoursRemaining} hrs {minutesRemaining} mins 
-        </button>
-      );
+        
+
+       //for mobile return this button --------------------------------------------------------------------->
+
+       if(isMobile){
+        return ( 
+
+          <button disabled className="p-2 w-full font-semibold text-blue-700 text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-200">
+           {hoursRemaining} hrs {minutesRemaining} mins 
+          </button>
+          
+        )
+       }else{
+
+         //timer for desktop button if booked ---------------------------------------------------------------------->
+         return ( 
+  
+          <button disabled className="p-2 w-full font-semibold text-blue-700 text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-200">
+           {hoursRemaining} hrs {minutesRemaining} mins 
+          </button>
+          
+        );
+       }
       }else if (timeDifference == 0){             //timer gets refreshes when page loads or reload
-        // Class time is present
-      return (
-        <button className="p-2 w-full bg-blue-700 text-white text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-500">
-          Join Now
-        </button>
-      );
+        // Class time is present  
+        // button to show Join link in mobile view if class is present ------------------------------------>
+        if(isMobile){
+          return (
+            <div className="p-2">
+              <button className="p-2 w-full bg-blue-700 text-white text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-blue-500">Join now <BiLinkExternal /></button>
+             </div>
+          );
+
+          //Returning Join button for desktop--------------------------------------------------------------->
+        }else {
+
+          return (
+            <button className="p-2 w-full bg-blue-700 text-white text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-slate-500">
+              Join Now
+            </button>
+          );
+        }
       }else {
          // Class time is in the past
       return (
@@ -91,23 +117,34 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
      
     }else {
 
-      //show book now button 
+      //show book now button for mobile and desktop
+      
+      // mobile
+      if(isMobile){
 
-      return (
-        <button className="p-2 w-full bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:text-white hover:bg-slate-500">
-        Book Now
-      </button>
-      )
+        return (
+  
+          
+          <button onClick={()=> setShowModal(true)} className="w-[340px] ml-2 h-10 bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center  hover:cursor-pointer hover:text-white hover:bg-slate-500">
+          Book Now
+        </button>
+        )
+      }else {
+        return (
+          <button onClick={()=> setShowModal(true)} className="p-2 w-full bg-slate-200 text-sm font-semibold text-black rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:text-white hover:bg-slate-500">
+          Book Now
+        </button>
+        )
+      }
+
     }
   }
 
   /*
- 
   //filtering data based on checkbox
-
   **/
+ const filteredData = showBookedOnly ? data.filter(item => item.isBooked) : data
 
-  const filteredData = showBookedOnly ? data.filter(item => item.isBooked) : data
  
   return (
     <div className=" h-screen lg:h-[425px] w-full lg:w-[560px] mt-3 ml-3  flex flex-col p-2 bg-white rounded-lg">
@@ -219,9 +256,8 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
        <p className="text-xs font-semibold"> by {item.instructor}</p>
              </div>
 
-             <div className="p-2">
-              <button className="p-2 w-full bg-blue-700 text-white text-sm rounded-lg flex items-center justify-center gap-1 hover:cursor-pointer hover:bg-blue-500">Join now <BiLinkExternal /></button>
-             </div>
+            
+             {renderActionButton(item)}
             </div>
 
               ))
@@ -229,6 +265,28 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
            </div>
         )}
       </div>
+
+      <Modal show={showModal} onClose={()=> setShowModal(false)} popup size='md'>
+        <Modal.Header />
+        
+        <Modal.Body>
+          <div className="p-2">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              You are about to book a spot for this session. Are you sure you want to proceed ?
+            </p>
+
+          </div>
+        
+        </Modal.Body>
+        <Modal.Footer>
+          <Button color='blue' onClick={() => setShowModal(false)}>I accept</Button>
+          <Button color="gray" onClick={() => setShowModal(false)}>
+            Decline
+          </Button>
+        </Modal.Footer>
+
+        
+      </Modal>
     </div>
   );
 }
