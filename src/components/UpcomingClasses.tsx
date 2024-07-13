@@ -19,7 +19,14 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
   const [classToBook, setClassBook] = useState<ClassData | null>(null)  //state to keep track which class is booked
 
   const [classData, setClassData] = useState<ClassData[]>(data);
-  // useEffect hook to add and clean up the resize event listener
+
+
+ // Sync classData with the data prop when ever the pagination button is clicked
+ useEffect(() => {
+  setClassData(data);
+}, [data]);
+
+  // useEffect hook to add and clean up the resize event listener-------------------------------------------------------->
   useEffect(() => {
     //function to handle window resize
     const handleResize = () => {

@@ -31,6 +31,11 @@ function HomePage() {
   //function to handle page change  
   const onPageChange = (page: number) => setCurrentPage(page);
 
+  useEffect(() => {
+    //re-render if change in filteredData or currentPage
+    console.log(currentData)
+  }, [currentPage, filteredData]);
+
    useEffect(()=>{
     //re render if change in filterd Data or currentPage
    },[currentPage, filteredData])
@@ -62,8 +67,8 @@ function HomePage() {
         </div>
         
         <div className="flex overflow-x-auto sm:justify-center md:flex hidden">
-      <Pagination currentPage={currentPage} totalPages={10} onPageChange={onPageChange} />
-    </div>
+        <Pagination currentPage={currentPage} totalPages={100} onPageChange={onPageChange} showIcons />
+        </div> 
 
         {/* Bottom nav bar */}
         <BottomNavBar />
