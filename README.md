@@ -33,17 +33,17 @@ Follow these steps to set up the project locally:
 
 ## Project Structure
 
-  Student Dashboard /
-   |-- public/
-   |-- src/
-   |    |--components/
-   |    |--pages/
-   |    |--redux/
-   |    |--utils/
-   |    |--App.tsx/
-   |    |--main.tsx/
-   |-- package.json
-   |-- README.md
+   Student_Dashboard/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── redux/
+│   ├── utils
+│   └── App.tsx
+│   └── main.tsx
+├── package.json
+└── README.md
 
 
 ## Usage
