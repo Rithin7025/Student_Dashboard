@@ -162,13 +162,13 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
       <div className="h-14  p-2  bg-white flex justify-between">
         {/* right side headging */}
         <div>
-          <p className="font-semibold ">Upcoming classes</p>
+          <p className="font-semibold dark:text-black">Upcoming classes</p>
           <p className="text-xs text-slate-400">For next 7 days</p>
         </div>
 
         {/* left side check box */}
         <div className="flex items-center mb-4 gap-2">
-    <label htmlFor="Booked only" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Booked only</label>
+    <label htmlFor="Booked only" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-00 ">Booked only</label>
     {/* here the checked is set to true of false according to the checks and changing the setShowbookedonly */}
     <input id="Booked only" checked={showBookedOnly} onChange={(e)=> setShowBookedOnly(e.target.checked)} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 </div>

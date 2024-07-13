@@ -50,8 +50,8 @@ function HomePage() {
         <Header />
 
         {/* Dashboard Heading */}
-        <div className="bg-white h-16 lg:h-14 w-full flex items-center ">
-          <p className="ml-6 text-2xl font-bold mb-2"> Dashboard</p>
+        <div className="bg-white h-16 lg:h-14 w-full flex items-center dark:bg-gray-800">
+          <p className="ml-6 text-2xl font-bold mb-2 "> Dashboard</p>
         </div>
 
         {/* upcoming classes And Assignments */}

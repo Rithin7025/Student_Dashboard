@@ -25,7 +25,7 @@ function Assignments() {
     },
   ]
   return (
-    <div className=' bg-white lg:h-[425px] w-full h-full lg:w-[560px] mt-3 ml-2 lg:mr-0 rounded-lg flex flex-col p-5'>
+    <div className=' bg-white dark:bg-gray-800 lg:h-[425px] w-full h-full lg:w-[560px] mt-3 ml-2 lg:mr-0 rounded-lg flex flex-col p-5'>
 
       <p className='font-semibold mb-6'>Assignments</p>
 

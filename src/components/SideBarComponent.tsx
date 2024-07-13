@@ -23,7 +23,7 @@ import AvatarComponent from "./Avatar";
 **/
 function SideBarComponent() {
   return (
-    <div className="bg-white flex flex-col justify-center">
+    <div className="bg-white flex flex-col justify-center dark:bg-gray-800">
       {/* Logo goes here */}
       <div className="h-14  gap-4 flex items-center hidden sm:flex">
          {/* div for image */}
