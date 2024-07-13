@@ -1,4 +1,3 @@
-import { Avatar } from "flowbite-react";
 
 
 function AvatarComponent() {

@@ -21,7 +21,7 @@ import { classesData } from "../utils/data";
 function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4
-  const [filteredData, setFilteredData] = useState(classesData); // Initial data state
+  const [filteredData] = useState(classesData); // Initial data state
   
   //calculating index
   const indexOfLastItem = currentPage * itemsPerPage;
