@@ -239,7 +239,7 @@ function UpcomingClasses({data } : UpcomingClassesProps) {
             {
               filteredData.map((item)=> (
         
-            <div key={item.id} className="h-36 w-full   rounded-lg border border-gray-300 mt-3 flex flex-col">
+            <div key={item.id} className="h-36 w-full   rounded-lg border border-gray-300 mt-3 flex flex-col dark:bg-gray-800">
              {/* 
 
              heading and time

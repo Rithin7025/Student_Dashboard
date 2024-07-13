@@ -6,7 +6,7 @@ import { Avatar } from "flowbite-react";
 
 function BottomNavBar() {
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white flex justify-around items-center py-2 lg:hidden">
+    <div className="fixed bottom-0 left-0 w-full bg-white flex justify-around items-center py-2 lg:hidden dark:bg-gray-800">
         {/* dashboard */}
         <div className="flex flex-col items-center">
         <RiDashboardHorizontalFill />
